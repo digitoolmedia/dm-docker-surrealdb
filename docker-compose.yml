@@ -13,7 +13,7 @@ services:
       SURREAL_AUTH: ${SURREAL_AUTH:-true}
       SURREAL_LOG: ${SURREAL_LOG:-info}
     networks:
-      - caddy_public
+      - caddy-public
     volumes:
       - db_data:/data
     deploy:
@@ -36,7 +36,7 @@ services:
         caddy.reverse_proxy_1.header_up: "Host {host}"
 
 networks:
-  caddy_public:
+  caddy-public:
     external: true
 
 volumes:
