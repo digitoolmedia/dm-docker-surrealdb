@@ -12,6 +12,8 @@ services:
       SURREAL_PASS: ${SURREAL_PASS}
       SURREAL_AUTH: ${SURREAL_AUTH:-true}
       SURREAL_LOG: ${SURREAL_LOG:-info}
+    networks:
+      - caddy_public
     volumes:
       - db_data:/data
     deploy:
