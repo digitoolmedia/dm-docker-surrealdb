@@ -24,7 +24,12 @@ services:
       labels:
         caddy: ${SURREAL_DOMAIN}
         caddy.encode: zstd gzip
-        caddy.reverse_proxy: "{{upstreams 8000}}"
+        caddy.@ws.0_header: Connection *Upgrade*
+        caddy.@ws.1_header: Upgrade websocket
+        caddy.reverse_proxy_0: "{{upstreams 8000}}"
+        caddy.reverse_proxy_0.header_up: "Host {host}"
+        caddy.reverse_proxy_1: "@ws {{upstreams 8000}}"
+        caddy.reverse_proxy_1.header_up: "Host {host}"
 
 networks:
   caddy_public:
