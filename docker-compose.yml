@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    command: start --auth file:/data/database.db
+    environment:
+      SURREAL_USER: ${SURREAL_USER}
+      SURREAL_PASS: ${SURREAL_PASS}
+      SURREAL_LOG: ${SURREAL_LOG:-info}
+    volumes:
+      - db_data:/data
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: 
+          - ${NODE_PLACEMENT}
+      labels:
+        caddy: ${SURREAL_DOMAIN}
+        caddy.encode: zstd gzip
+        caddy.reverse_proxy: "{{upstreams 8000}}"
+
+networks:
+  caddy_public:
+    external: true
+
+volumes:
+  db_data:
