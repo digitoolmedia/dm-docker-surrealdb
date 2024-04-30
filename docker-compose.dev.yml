@@ -1,12 +1,14 @@
 version: '3.8'
+name: surrealdb-dev
 
 services:
   surrealdb:
     image: surrealdb/surrealdb:latest
-    command: start --auth file:/data/database.db
+    command: start file:/data/database.db
     environment:
       SURREAL_USER: ${SURREAL_USER:-root}
       SURREAL_PASS: ${SURREAL_PASS:-root}
+      SURREAL_AUTH: ${SURREAL_AUTH:-true}
       SURREAL_LOG: ${SURREAL_LOG:-info}
     volumes:
       - db_data:/data
