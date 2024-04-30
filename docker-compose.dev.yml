@@ -6,6 +6,8 @@ services:
     image: surrealdb/surrealdb:latest
     command: start file:/data/database.db
     user: root
+    tty: true
+    stdin_open: true
     environment:
       SURREAL_USER: ${SURREAL_USER:-root}
       SURREAL_PASS: ${SURREAL_PASS:-root}
