@@ -4,6 +4,7 @@ services:
   surrealdb:
     image: surrealdb/surrealdb:latest
     command: start file:/data/database.db
+    user: root
     environment:
       SURREAL_USER: ${SURREAL_USER}
       SURREAL_PASS: ${SURREAL_PASS}
