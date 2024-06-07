@@ -13,6 +13,7 @@ services:
       SURREAL_PASS: ${SURREAL_PASS:-root}
       SURREAL_AUTH: ${SURREAL_AUTH:-true}
       SURREAL_LOG: ${SURREAL_LOG:-info}
+      SURREAL_CLIENT_IP: ${SURREAL_CLIENT_IP:-socket}
     volumes:
       - db_data:/data
 

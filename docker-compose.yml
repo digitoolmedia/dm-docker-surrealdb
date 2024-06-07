@@ -12,6 +12,7 @@ services:
       SURREAL_PASS: ${SURREAL_PASS}
       SURREAL_AUTH: ${SURREAL_AUTH:-true}
       SURREAL_LOG: ${SURREAL_LOG:-info}
+      SURREAL_CLIENT_IP: ${SURREAL_CLIENT_IP:-X-Forwarded-For}
     networks:
       - caddy-public
     volumes:
