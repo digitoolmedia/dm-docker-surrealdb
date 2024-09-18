@@ -16,7 +16,7 @@ services:
     networks:
       - caddy-public
     volumes:
-      - db_data:/data
+      - db-data:/data
     deploy:
       restart_policy:
         condition: on-failure
@@ -41,4 +41,4 @@ networks:
     external: true
 
 volumes:
-  db_data:
+  db-data:

@@ -15,7 +15,7 @@ services:
       SURREAL_LOG: ${SURREAL_LOG:-info}
       SURREAL_CLIENT_IP: ${SURREAL_CLIENT_IP:-socket}
     volumes:
-      - db_data:/data
+      - db-data:/data
 
 volumes:
-  db_data:
+  db-data:
