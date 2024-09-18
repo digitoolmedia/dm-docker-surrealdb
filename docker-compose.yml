@@ -3,7 +3,7 @@ version: '3.8'
 services:
   surrealdb:
     image: surrealdb/surrealdb:latest
-    command: start file:/data/database.db -A
+    command: start surrealkv://data/database.db -A
     user: root
     tty: true
     stdin_open: true
