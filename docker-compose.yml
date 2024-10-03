@@ -2,21 +2,32 @@ version: '3.8'
 
 services:
   surrealdb:
-    image: surrealdb/surrealdb:latest
-    command: start surrealkv://data/database.db -A
+    image: surrealdb/surrealdb:v2
+    command: start
     user: root
     tty: true
     stdin_open: true
     environment:
+      SURREAL_PATH: ${SURREAL_PATH:-rocksdb://data/database.db}
       SURREAL_USER: ${SURREAL_USER}
       SURREAL_PASS: ${SURREAL_PASS}
-      SURREAL_AUTH: ${SURREAL_AUTH:-true}
       SURREAL_LOG: ${SURREAL_LOG:-info}
+      SURREAL_STRICT: ${SURREAL_STRICT:-false}
       SURREAL_CLIENT_IP: ${SURREAL_CLIENT_IP:-X-Forwarded-For}
+      SURREAL_CAPS_ALLOW_GUESTS: ${SURREAL_CAPS_ALLOW_GUESTS:-true}
+      SURREAL_CAPS_ALLOW_SCRIPT: ${SURREAL_CAPS_ALLOW_SCRIPT:-true}
+      SURREAL_CAPS_ALLOW_NET: ${SURREAL_CAPS_ALLOW_NET:-false}
+      SURREAL_CAPS_DENY_FUNC: ${SURREAL_CAPS_DENY_FUNC:-false}
     networks:
       - caddy-public
     volumes:
       - db-data:/data
+    healthcheck:
+      test: ["CMD", "surreal", "isready", "--conn https://${SURREAL_DOMAIN}"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 10s
     deploy:
       restart_policy:
         condition: on-failure
