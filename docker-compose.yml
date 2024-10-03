@@ -23,7 +23,7 @@ services:
     volumes:
       - db-data:/data
     healthcheck:
-      test: ["CMD", "surreal", "isready", "--conn http://0.0.0.0:8000"]
+      test: ["CMD", "surreal", "isready"]
       interval: 5s
       timeout: 10s
       retries: 10
